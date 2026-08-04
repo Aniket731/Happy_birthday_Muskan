@@ -1,1805 +1,954 @@
 <!DOCTYPE html>
-
 <html lang="hi">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Happy Birthday My Universe ❤️</title>
-
-    <!-- Favicon (Browser Tab Icon) -->
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
-
-    <!-- Canvas Confetti Library for Fireworks & Celebration -->
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
-    <style>
-
-        * {
-
-            margin: 0;
-
-            padding: 0;
-
-            box-sizing: border-box;
-
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
-
-        }
-
-
-        body {
-
-            background: linear-gradient(135deg, #1a002c 0%, #3a0050 50%, #5c0029 100%);
-
-            color: #fff;
-
-            min-height: 100vh;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            padding: 20px;
-
-            overflow-x: hidden;
-
-            text-align: center;
-
-        }
-
-
-        /* Floating Music Toggle Button */
-
-        .music-control {
-
-            position: fixed;
-
-            top: 20px;
-
-            right: 20px;
-
-            z-index: 999;
-
-            background: rgba(255, 255, 255, 0.2);
-
-            backdrop-filter: blur(10px);
-
-            border: 2px solid #ff758c;
-
-            color: #fff;
-
-            width: 45px;
-
-            height: 45px;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            cursor: pointer;
-
-            font-size: 1.2rem;
-
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-
-            transition: all 0.3s;
-
-            animation: pulseGlow 2s infinite;
-
-        }
-
-
-        @keyframes pulseGlow {
-
-            0% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.7); }
-
-            70% { box-shadow: 0 0 0 12px rgba(255, 117, 140, 0); }
-
-            100% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); }
-
-        }
-
-
-        /* Floating Balloons Container */
-
-        #balloon-container {
-
-            position: fixed;
-
-            top: 0; left: 0; width: 100%; height: 100%;
-
-            pointer-events: none;
-
-            z-index: 2;
-
-            overflow: hidden;
-
-        }
-
-
-        .balloon {
-
-            position: absolute;
-
-            width: 35px;
-
-            height: 48px;
-
-            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-
-            bottom: -100px;
-
-            animation: floatUp 7s linear infinite;
-
-            opacity: 0.85;
-
-            cursor: pointer;
-
-            pointer-events: auto;
-
-        }
-
-        .balloon::before {
-
-            content: "";
-
-            position: absolute;
-
-            bottom: -8px;
-
-            left: 16px;
-
-            width: 2px;
-
-            height: 12px;
-
-            background: rgba(255, 255, 255, 0.6);
-
-        }
-
-
-        @keyframes floatUp {
-
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
-
-            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
-
-        }
-
-
-        /* Heart Rain Animation */
-
-        .heart-particle {
-
-            position: fixed;
-
-            top: -20px;
-
-            color: #ff416c;
-
-            font-size: 20px;
-
-            pointer-events: none;
-
-            z-index: 99;
-
-            animation: heartRain 4s linear infinite;
-
-        }
-
-
-        @keyframes heartRain {
-
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
-
-        }
-
-
-        .webbook-container {
-
-            max-width: 800px;
-
-            width: 100%;
-
-            background: rgba(255, 255, 255, 0.08);
-
-            backdrop-filter: blur(15px);
-
-            border-radius: 25px;
-
-            padding: 35px 20px;
-
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            margin: 20px 0;
-
-            position: relative;
-
-            z-index: 10;
-
-        }
-
-
-        .step-section {
-
-            display: none;
-
-            animation: fadeIn 0.8s ease forwards;
-
-        }
-
-
-        .step-section.active {
-
-            display: block;
-
-        }
-
-
-        .header-badge {
-
-            background: linear-gradient(45deg, rgba(255, 65, 108, 0.3), rgba(255, 75, 43, 0.3));
-
-            border: 1px solid #ff758c;
-
-            border-radius: 50px;
-
-            padding: 8px 22px;
-
-            display: inline-block;
-
-            color: #ffd1dc;
-
-            font-weight: 600;
-
-            font-size: 0.95rem;
-
-            margin-bottom: 20px;
-
-            letter-spacing: 0.5px;
-
-            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.2);
-
-        }
-
-
-        /* Countdown Box */
-
-        #timer {
-
-            display: flex;
-
-            justify-content: center;
-
-            gap: 12px;
-
-            margin: 20px 0 30px;
-
-        }
-
-
-        .time-box {
-
-            background: rgba(0, 0, 0, 0.4);
-
-            padding: 10px 15px;
-
-            border-radius: 12px;
-
-            min-width: 65px;
-
-            border: 1px solid rgba(255,255,255,0.2);
-
-        }
-
-
-        .time-box span {
-
-            display: block;
-
-            font-size: 1.5rem;
-
-            font-weight: bold;
-
-            color: #ff758c;
-
-        }
-
-
-        .cake-img-box {
-
-            margin: 20px auto;
-
-            max-width: 280px;
-
-        }
-
-
-        .cake-img-box img {
-
-            width: 100%;
-
-            border-radius: 15px;
-
-        }
-
-
-        .action-btn {
-
-            background: linear-gradient(45deg, #ff007f, #7928ca);
-
-            border: none;
-
-            color: white;
-
-            padding: 14px 30px;
-
-            font-size: 1.05rem;
-
-            border-radius: 50px;
-
-            cursor: pointer;
-
-            font-weight: bold;
-
-            box-shadow: 0 6px 20px rgba(255, 0, 127, 0.4);
-
-            transition: all 0.3s ease;
-
-            margin: 15px 5px;
-
-        }
-
-
-        .action-btn:hover {
-
-            transform: translateY(-3px) scale(1.05);
-
-        }
-
-
-        /* Video Styling */
-
-        .video-box video {
-
-            width: 100%;
-
-            max-height: 420px;
-
-            border-radius: 20px;
-
-            border: 3px solid #ff416c;
-
-        }
-
-
-        /* Interactive Envelope Styling */
-
-        .envelope-wrapper {
-
-            margin: 30px auto;
-
-            cursor: pointer;
-
-            perspective: 1000px;
-
-            max-width: 320px;
-
-        }
-
-        .envelope {
-
-            background: linear-gradient(135deg, #ff758c, #ff416c);
-
-            padding: 30px 20px;
-
-            border-radius: 15px;
-
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-
-            border: 2px dashed #fff;
-
-            transition: transform 0.5s;
-
-        }
-
-        .envelope:hover {
-
-            transform: scale(1.05) rotate(-2deg);
-
-        }
-
-
-        /* Text Display Card */
-
-        .display-card {
-
-            background: rgba(255, 255, 255, 0.95);
-
-            color: #2c003e;
-
-            padding: 25px;
-
-            border-radius: 20px;
-
-            text-align: left;
-
-            margin-top: 15px;
-
-            white-space: pre-wrap;
-
-            line-height: 1.7;
-
-            font-size: 1.05rem;
-
-        }
-
-
-        /* Slideshow Styling */
-
-        .slide-card {
-
-            background: rgba(0, 0, 0, 0.3);
-
-            border-radius: 20px;
-
-            padding: 20px;
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            cursor: pointer;
-
-        }
-
-
-        .slide-card img {
-
-            width: 100%;
-
-            max-height: 380px;
-
-            object-fit: cover;
-
-            border-radius: 15px;
-
-            border: 2px solid #ff758c;
-
-            transition: transform 0.3s;
-
-        }
-
-
-        .quality-quote {
-
-            font-size: 1.2rem;
-
-            color: #ffd1dc;
-
-            margin-top: 15px;
-
-            font-weight: 500;
-
-            line-height: 1.6;
-
-        }
-
-
-        /* Promises Grid Styling */
-
-        .promises-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-
-            gap: 15px;
-
-            margin-top: 20px;
-
-        }
-
-        .promise-card {
-
-            background: rgba(255,255,255,0.15);
-
-            border: 2px solid #ff758c;
-
-            border-radius: 15px;
-
-            padding: 20px 10px;
-
-            cursor: pointer;
-
-            transition: all 0.3s;
-
-            font-weight: bold;
-
-        }
-
-        .promise-card:hover {
-
-            background: #ff416c;
-
-            transform: scale(1.05);
-
-        }
-
-
-        /* Family Video Gallery Styling */
-
-        .category-tabs {
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 10px;
-
-            margin-bottom: 20px;
-
-        }
-
-        .tab-btn {
-
-            background: rgba(255,255,255,0.2);
-
-            border: 1px solid #ff758c;
-
-            color: #fff;
-
-            padding: 10px 18px;
-
-            border-radius: 25px;
-
-            cursor: pointer;
-
-            font-weight: bold;
-
-            font-size: 0.9rem;
-
-            transition: all 0.3s;
-
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-
-            background: #ff416c;
-
-            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
-
-        }
-
-
-        .family-video-grid {
-
-            display: grid;
-
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-            gap: 15px;
-
-            margin-top: 15px;
-
-        }
-
-        .family-card {
-
-            background: rgba(0, 0, 0, 0.4);
-
-            border-radius: 15px;
-
-            padding: 12px;
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-        }
-
-        .family-card video {
-
-            width: 100%;
-
-            height: 180px;
-
-            object-fit: cover;
-
-            border-radius: 10px;
-
-            background: #000;
-
-        }
-
-        .family-card-title {
-
-            margin-top: 8px;
-
-            font-weight: bold;
-
-            color: #ffd1dc;
-
-            font-size: 0.95rem;
-
-        }
-
-
-        /* Quiz Game Styling */
-
-        .quiz-card {
-
-            background: rgba(0, 0, 0, 0.4);
-
-            border-radius: 20px;
-
-            padding: 25px 20px;
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            text-align: left;
-
-        }
-
-
-        .quiz-card input[type="text"], .quiz-card textarea {
-
-            width: 100%;
-
-            padding: 12px 18px;
-
-            border-radius: 12px;
-
-            border: 2px solid #ff758c;
-
-            background: rgba(255, 255, 255, 0.9);
-
-            color: #333;
-
-            font-size: 1rem;
-
-            margin: 15px 0;
-
-            outline: none;
-
-        }
-
-
-        /* Funny Running Button Container */
-
-        .run-container {
-
-            position: relative;
-
-            min-height: 120px;
-
-            margin-top: 20px;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            gap: 20px;
-
-        }
-
-
-        #noBtn {
-
-            position: relative;
-
-            transition: all 0.2s ease;
-
-        }
-
-
-        /* Scratch Card Styling */
-
-        .scratch-container {
-
-            position: relative;
-
-            width: 280px;
-
-            height: 140px;
-
-            margin: 20px auto;
-
-            border-radius: 15px;
-
-            overflow: hidden;
-
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-
-            border: 2px solid #ff758c;
-
-        }
-
-
-        .scratch-content {
-
-            width: 100%;
-
-            height: 100%;
-
-            background: #fff;
-
-            color: #ff007f;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-
-            align-items: center;
-
-            padding: 10px;
-
-            font-weight: bold;
-
-            font-size: 1.1rem;
-
-        }
-
-
-        canvas#scratchCanvas {
-
-            position: absolute;
-
-            top: 0;
-
-            left: 0;
-
-            cursor: pointer;
-
-        }
-
-
-        /* Custom Modal */
-
-        .modal-overlay {
-
-            display: none;
-
-            position: fixed;
-
-            top: 0; left: 0; width: 100%; height: 100%;
-
-            background: rgba(0, 0, 0, 0.85);
-
-            z-index: 100;
-
-            justify-content: center;
-
-            align-items: center;
-
-            padding: 20px;
-
-        }
-
-
-        .modal-content {
-
-            background: #fff;
-
-            color: #333;
-
-            padding: 30px;
-
-            border-radius: 20px;
-
-            max-width: 450px;
-
-            width: 100%;
-
-            text-align: center;
-
-        }
-
-
-        @keyframes fadeIn {
-
-            from { opacity: 0; transform: translateY(15px); }
-
-            to { opacity: 1; transform: translateY(0); }
-
-        }
-
-    </style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Universe ❤️</title>
+    <!-- Favicon (Browser Tab Icon) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+    <!-- Canvas Confetti Library for Fireworks & Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a002c 0%, #3a0050 50%, #5c0029 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* Floating Music Toggle Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff758c;
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(255, 117, 140, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 117, 140, 0); }
+        }
+
+        /* Floating Balloons Container */
+        #balloon-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .balloon {
+            position: absolute;
+            width: 35px;
+            height: 48px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            bottom: -100px;
+            animation: floatUp 7s linear infinite;
+            opacity: 0.85;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+        .balloon::before {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 16px;
+            width: 2px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+            100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
+        }
+
+        /* Heart Rain Animation */
+        .heart-particle {
+            position: fixed;
+            top: -20px;
+            color: #ff416c;
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 99;
+            animation: heartRain 4s linear infinite;
+        }
+
+        @keyframes heartRain {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+
+        .webbook-container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 35px 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-section {
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .step-section.active {
+            display: block;
+        }
+
+        .header-badge {
+            background: linear-gradient(45deg, rgba(255, 65, 108, 0.3), rgba(255, 75, 43, 0.3));
+            border: 1px solid #ff758c;
+            border-radius: 50px;
+            padding: 8px 22px;
+            display: inline-block;
+            color: #ffd1dc;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.2);
+        }
+
+        /* Countdown Box */
+        #timer {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0 30px;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px 15px;
+            border-radius: 12px;
+            min-width: 65px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff758c;
+        }
+
+        .cake-img-box {
+            margin: 20px auto;
+            max-width: 280px;
+        }
+
+        .cake-img-box img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #ff007f, #7928ca);
+            border: none;
+            color: white;
+            padding: 14px 30px;
+            font-size: 1.05rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(255, 0, 127, 0.4);
+            transition: all 0.3s ease;
+            margin: 15px 5px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Video Styling */
+        .video-box video {
+            width: 100%;
+            max-height: 420px;
+            border-radius: 20px;
+            border: 3px solid #ff416c;
+        }
+
+        /* Interactive Envelope Styling */
+        .envelope-wrapper {
+            margin: 30px auto;
+            cursor: pointer;
+            perspective: 1000px;
+            max-width: 320px;
+        }
+        .envelope {
+            background: linear-gradient(135deg, #ff758c, #ff416c);
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border: 2px dashed #fff;
+            transition: transform 0.5s;
+        }
+        .envelope:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        /* Text Display Card */
+        .display-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2c003e;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: left;
+            margin-top: 15px;
+            white-space: pre-wrap;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Slideshow Styling */
+        .slide-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .slide-card img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid #ff758c;
+            transition: transform 0.3s;
+        }
+
+        .quality-quote {
+            font-size: 1.2rem;
+            color: #ffd1dc;
+            margin-top: 15px;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Promises Grid Styling */
+        .promises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .promise-card {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid #ff758c;
+            border-radius: 15px;
+            padding: 20px 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .promise-card:hover {
+            background: #ff416c;
+            transform: scale(1.05);
+        }
+
+        /* Family Video Gallery Styling */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid #ff758c;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: #ff416c;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+        }
+
+        .family-video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .family-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .family-card video {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #000;
+        }
+        .family-card-title {
+            margin-top: 8px;
+            font-weight: bold;
+            color: #ffd1dc;
+            font-size: 0.95rem;
+        }
+
+        /* Quiz Game Styling */
+        .quiz-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 25px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: left;
+        }
+
+        .quiz-card input[type="text"], .quiz-card textarea {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 2px solid #ff758c;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1rem;
+            margin: 15px 0;
+            outline: none;
+        }
+
+        /* Funny Running Button Container */
+        .run-container {
+            position: relative;
+            min-height: 120px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #noBtn {
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        /* Scratch Card Styling */
+        .scratch-container {
+            position: relative;
+            width: 280px;
+            height: 140px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid #ff758c;
+        }
+
+        .scratch-content {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            color: #ff007f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        canvas#scratchCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+
+        /* Custom Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff;
+            color: #333;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
 
-
-    <!-- Floating Balloons Container -->
-
-    <div id="balloon-container"></div>
-
-
-    <!-- Floating Music Toggle -->
-
-    <div class="music-control" onclick="toggleMusic()" title="Play/Pause Song">🎵</div>
-
-
-    <audio id="bdaySong" loop><source src="song.mp3" type="audio/mpeg"></audio>
-
-
-    <div class="webbook-container">
-
-
-        <!-- STEP 1: Front Page (Sirf Yahan Muskan Naam Rahega) -->
-
-        <div class="step-section active" id="step1">
-
-            <h1 style="color: #ffd1dc; font-size: 2.2rem; text-shadow: 0 0 10px #ff416c;">Happy Birthday Muskan Singh! ✨</h1>
-
-            <p style="margin-top: 5px; font-style: italic; opacity: 0.9;">17 August Birthday Countdown</p>
-
-
-            <div id="timer">
-
-                <div class="time-box"><span id="days">00</span>Days</div>
-
-                <div class="time-box"><span id="hours">00</span>Hours</div>
-
-                <div class="time-box"><span id="minutes">00</span>Min</div>
-
-                <div class="time-box"><span id="seconds">00</span>Sec</div>
-
-            </div>
-
-
-            <div class="cake-img-box">
-
-                <img src="cake.gif" alt="Cake GIF" onerror="this.src='https://media.giphy.com/media/l1BgS99y8L2ybg6sM/giphy.gif'">
-
-            </div>
-
-
-            <button class="action-btn" onclick="startSurprise()">🎂 Blow Candle & Start Surprise ✨</button>
-
-        </div>
-
-
-        <!-- STEP 2: Edited Video Player -->
-
-        <div class="step-section" id="step2">
-
-            <div class="header-badge">✨ Chapter 1: Our Special Video & Precious Moments ✨</div>
-
-            <h2 style="color: #ffd1dc; margin-bottom: 15px;">🎥 Our Special Moments</h2>
-
-            <div class="video-box">
-
-                <video id="myVideo" controls onended="nextStep(3)">
-
-                    <source src="video.mp4" type="video/mp4">
-
-                </video>
-
-            </div>
-
-            <button class="action-btn" onclick="nextStep(3)">Next: Unseal Letter 💌</button>
-
-        </div>
-
-
-        <!-- STEP 3: Envelope, Voice Note & Letter (note1.txt) -->
-
-        <div class="step-section" id="step3">
-
-            <div class="header-badge">💌 Chapter 2: A Special Message From My Heart 💌</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 15px;">Special Letter For You</h2>
-
-            
-
-            <div id="envelopeBox" class="envelope-wrapper" onclick="openEnvelope()">
-
-                <div class="envelope">
-
-                    <span style="font-size: 3rem;">✉️</span>
-
-                    <h3 style="margin-top:10px;">Tap To Unseal Letter</h3>
-
-                    <p style="font-size: 0.85rem; opacity: 0.9;">For Meri Moto / Kuchu Puchu ❤️</p>
-
-                </div>
-
-            </div>
-
-
-            <div id="letterContentBox" style="display:none;">
-
-                <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 15px; margin-bottom: 15px; border: 1px dashed #ff758c;">
-
-                    <p style="font-size:0.9rem; margin-bottom:8px; color:#ffd1dc;">🎙️ Play My Audio Message:</p>
-
-                    <audio controls style="width:100%; max-width:300px;"><source src="voice.mp3" type="audio/mpeg"></audio>
-
-                </div>
-
-
-                <div class="display-card" id="note1Content">Loading letter from note1.txt...</div>
-
-                <button class="action-btn" onclick="nextStep(4)">Next: 11 Special Qualities 🌸</button>
-
-            </div>
-
-        </div>
-
-
-        <!-- STEP 4: 11 Photos & Qualities Slideshow -->
-
-        <div class="step-section" id="step4">
-
-            <div class="header-badge">🌸 Chapter 3: 11 Things That Make You So Special 🌸</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 15px;">11 Things I Love About My Kuchu Puchu</h2>
-
-            
-
-            <div class="slide-card" onclick="zoomPhoto()">
-
-                <img id="slideImg" src="photo1.jpg" onerror="this.src='https://via.placeholder.com/600x380/ff758c/ffffff?text=Photo+1'">
-
-                <p class="quality-quote" id="slideQuote">Quality loading...</p>
-
-                <p style="font-size:0.75rem; opacity:0.7; margin-top:5px;">(Tap photo for Zoom View 🔍)</p>
-
-            </div>
-
-
-            <div style="margin-top: 15px;">
-
-                <button class="action-btn" style="padding: 10px 20px;" onclick="changeSlide(-1)">❮ Prev</button>
-
-                <span id="slideCounter" style="font-weight: bold; margin: 0 15px;">1 / 11</span>
-
-                <button class="action-btn" style="padding: 10px 20px;" onclick="changeSlide(1)">Next ❯</button>
-
-            </div>
-
-            <br>
-
-            <button class="action-btn" onclick="nextStep(5)">Next: Secret Scratch Card 🎁</button>
-
-        </div>
-
-
-        <!-- STEP 5: Digital Scratch Card & 11 Promises Jar -->
-
-        <div class="step-section" id="step5">
-
-            <div class="header-badge">🎁 Secret Love Coupon Scratch Card 🎁</div>
-
-            <p style="margin-bottom: 10px;">Apni finger se neeche card ko ghis kar secret gift dekho Meri Moto!</p>
-
-
-            <div class="scratch-container">
-
-                <div class="scratch-content">
-
-                    <span>🎟️ SECRET COUPON 🎟️</span>
-
-                    <span style="font-size:0.85rem; color:#333; margin-top:5px;">"Unlimited Hugs & Late Night Coffee Dates Coupon Forever!" ❤️</span>
-
-                </div>
-
-                <canvas id="scratchCanvas" width="280" height="140"></canvas>
-
-            </div>
-
-
-            <hr style="border: 0.5px dashed rgba(255,255,255,0.3); margin: 25px 0;">
-
-
-            <div class="header-badge">💖 Forever Promises From Me To You 💖</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 10px;">Our 11 Promises Jar</h2>
-
-            
-
-            <div class="promises-grid" id="promisesGrid">
-
-                <!-- 11 Promise Jars rendered via JS -->
-
-            </div>
-
-            <br>
-
-            <button class="action-btn" onclick="nextStep(6)">Next: 11 Cute Yes/No Questions 😜</button>
-
-        </div>
-
-
-        <!-- STEP 6: 11 CUTE YES/NO QUESTIONS (ONE-BY-ONE) -->
-
-        <div class="step-section" id="step6">
-
-            <div class="header-badge">😜 Chapter 5: 11 Cute Yes/No Questions 😜</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 10px;" id="yesNoHeaderTitle">Questions 1/11</h2>
-
-            
-
-            <div class="quiz-card" style="text-align: center;">
-
-                <div id="yesNoQuestionText" style="font-weight: bold; font-size: 1.25rem; color: #ffd1dc; margin-bottom: 20px;">
-
-                    Question loading...
-
-                </div>
-
-
-                <div class="run-container">
-
-                    <button class="action-btn" style="background: linear-gradient(45deg, #11998e, #38ef7d);" onclick="handleYesClick()">YES, Humesha! ❤️</button>
-
-                    <button class="action-btn" id="noBtn" style="background: linear-gradient(45deg, #eb3349, #f45c43);" onmouseover="moveNoBtn()" onclick="moveNoBtn()">NO 😜</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- STEP 7: 11 FAMILY WISHES VIDEO GALLERY -->
-
-        <div class="step-section" id="step7">
-
-            <div class="header-badge">👨‍👩‍👧‍👦 Chapter 6: Special Wishes From Family 👨‍👩‍👧‍👦</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 15px;">11 Special Video Wishes For You</h2>
-
-
-            <div class="category-tabs">
-
-                <button class="tab-btn active" onclick="filterFamilyVideos('brothers_sisters', this)">👫 Brothers & Sisters</button>
-
-                <button class="tab-btn" onclick="filterFamilyVideos('elders', this)">🙏 Elders & Blessings</button>
-
-                <button class="tab-btn" onclick="filterFamilyVideos('family_members', this)">❤️ Family & Relatives</button>
-
-            </div>
-
-
-            <div class="family-video-grid" id="familyVideoGrid">
-
-                <!-- Videos rendered dynamically -->
-
-            </div>
-
-            <br>
-
-            <button class="action-btn" onclick="nextStep(8)">Next: Special Quiz Challenge 🎮</button>
-
-        </div>
-
-
-        <!-- STEP 8: Special 10 Quiz Questions (One-By-One) -->
-
-        <div class="step-section" id="step8">
-
-            <div class="header-badge">🎮 Chapter 7: Interactive Birthday Game Time 🎮</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 15px;">Special Quiz Challenge</h2>
-
-            <div id="quizBox" class="quiz-card">
-
-                <!-- Question will render dynamically -->
-
-            </div>
-
-        </div>
-
-
-        <!-- STEP 9: Treasure Hunt & Rating Collector -->
-
-        <div class="step-section" id="step9">
-
-            <div class="header-badge">🎁 Chapter 8: Final Grand Finale & Real Gift Clue 🎁</div>
-
-            <h2 style="color: #ff758c; margin-bottom: 15px;">Final Birthday Treasure Hunt!</h2>
-
-            
-
-            <div class="display-card" style="text-align: center;">
-
-                <span style="font-size: 3rem;">🕵️‍♂️</span>
-
-                <h3 style="color:#ff007f; margin:10px 0;">Your Real Gift Search Clue:</h3>
-
-                <p style="font-size:1.1rem; font-weight:bold; color:#333;">"Meri Kuchu Puchu, ab apna asli birthday gift dhoondhne ke liye apne bed pillow ke niche ya wardrobe me dekho!" 🎉🎁</p>
-
-            </div>
-
-
-            <div class="quiz-card" style="margin-top: 25px;">
-
-                <h3 style="color:#ff758c; margin-bottom:10px;">💌 Leave A Birthday Message For Me:</h3>
-
-                <textarea id="userFeedback" rows="3" placeholder="Meri Moto, aapko ye surprise kaisa laga? Yahan likho..."></textarea>
-
-                <button class="action-btn" onclick="submitFeedback()">Send Love Note ❤️</button>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- Custom Modal -->
-
-    <div class="modal-overlay" id="customModal">
-
-        <div class="modal-content">
-
-            <h3 id="modalTitle" style="color: #ff007f; margin-bottom: 10px;">Surprise!</h3>
-
-            <div id="modalMsgContainer">
-
-                <p id="modalMsg" style="line-height: 1.6; margin-bottom: 20px;"></p>
-
-            </div>
-
-            <button class="action-btn" style="padding: 8px 25px;" onclick="closeModal()">Continue ✨</button>
-
-        </div>
-
-    </div>
-
-
-    <script>
-
-        // 11 CUTE YES/NO QUESTIONS ARRAY
-
-        const yesNoQuestions = [
-
-            "1. Kya tum agle 100 saal tak sirf meri Moto aur Kuchu Puchu bane rehne ke liye ready ho? ❤️",
-
-            "2. Kya tumhe mera har saal is tarah surprise dena pasand aaya? 🥰",
-
-            "3. Kya tum mere gusse ko hamesha ki tarah bina gussa huye pyaar se manaogi? 🌸",
-
-            "4. Kya tum mere sath duniya ki har jagah ghoomne chalogi? 🌌",
-
-            "5. Kya tum maanti ho ki tum duniya ki sabse cute aur pyaari fiance ho? 💖",
-
-            "6. Kya tum mere sath late night maggi aur coffee dates ke liye hamesha ready rahogi? ☕",
-
-            "7. Kya tum apni pyari waali smile hamesha aise hi banaye rakhogi? 😊",
-
-            "8. Kya tum promise karti ho ki jab bhi pareshan hogi sabse pehle mujhe bataogi? 🤝",
-
-            "9. Kya tum mere har ek chote-bade dream me mera sath dogi? ✨",
-
-            "10. Kya tum maanti ho ki 11 saal ka ye safar hamari life ka sabse khoobsurat hissa tha? 💍",
-
-            "11. Kya tum mujhse infinite & beyond universe jitna pyaar karti ho? ❤️"
-
-        ];
-
-
-        let currentYesNoIdx = 0;
-
-        function renderYesNoQuestion(idx) {
-
-            currentYesNoIdx = idx;
-
-            document.getElementById('yesNoHeaderTitle').innerText = `Question ${currentYesNoIdx + 1} / 11`;
-
-            document.getElementById('yesNoQuestionText').innerText = yesNoQuestions[currentYesNoIdx];
-
-            const noBtn = document.getElementById('noBtn');
-
-            if(noBtn) noBtn.style.transform = "translate(0px, 0px)";
-
-        }
-
-
-        function handleYesClick() {
-
-            if(typeof confetti === 'function') confetti({ particleCount: 50, spread: 60 });
-
-            if(currentYesNoIdx < yesNoQuestions.length - 1) {
-
-                renderYesNoQuestion(currentYesNoIdx + 1);
-
-            } else {
-
-                showModal("Awww Meri Moto! ❤️", "Aapne sabhi 11 Yes/No questions ka answer YES diya! Ab family ke pyaare video messages dekho... ✨");
-
-                nextStep(7); // Move to Family Videos
-
-            }
-
-        }
-
-
-        function moveNoBtn() {
-
-            const btn = document.getElementById('noBtn');
-
-            const x = Math.random() * (window.innerWidth < 400 ? 120 : 250) - 100;
-
-            const y = Math.random() * 100 - 50;
-
-            btn.style.transform = `translate(${x}px, ${y}px)`;
-
-            showModal("Arey Arey! 😜", "NO button toh bhaag gaya! Kuchu Puchu ko sirf YES dabana allowed hai! ❤️");
-
-        }
-
-
-        // FAMILY WISHES VIDEOS DATA
-
-        const familyVideos = {
-
-            brothers_sisters: [
-
-                { title: "Brother / Sister Wish #1", src: "brothers_sisters/wish1.mp4" },
-
-                { title: "Brother / Sister Wish #2", src: "brothers_sisters/wish2.mp4" },
-
-                { title: "Brother / Sister Wish #3", src: "brothers_sisters/wish3.mp4" }
-
-            ],
-
-            elders: [
-
-                { title: "Elders Blessing #1", src: "elders/wish1.mp4" },
-
-                { title: "Elders Blessing #2", src: "elders/wish2.mp4" },
-
-                { title: "Elders Blessing #3", src: "elders/wish3.mp4" }
-
-            ],
-
-            family_members: [
-
-                { title: "Family Wish #1", src: "family_members/wish1.mp4" },
-
-                { title: "Family Wish #2", src: "family_members/wish2.mp4" },
-
-                { title: "Family Wish #3", src: "family_members/wish3.mp4" },
-
-                { title: "Family Wish #4", src: "family_members/wish4.mp4" },
-
-                { title: "Family Wish #5", src: "family_members/wish5.mp4" }
-
-            ]
-
-        };
-
-
-        function filterFamilyVideos(category, btnElem) {
-
-            if(btnElem) {
-
-                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-                btnElem.classList.add('active');
-
-            }
-
-
-            const grid = document.getElementById('familyVideoGrid');
-
-            const videos = familyVideos[category] || [];
-
-            let html = "";
-
-
-            videos.forEach(v => {
-
-                html += `
-
-                    <div class="family-card">
-
-                        <video controls poster="https://via.placeholder.com/300x180/3a0050/ffffff?text=Play+Wish+Video">
-
-                            <source src="${v.src}" type="video/mp4">
-
-                            Your browser does not support video.
-
-                        </video>
-
-                        <div class="family-card-title">${v.title}</div>
-
-                    </div>
-
-                `;
-
-            });
-
-            grid.innerHTML = html;
-
-        }
-
-
-        // QUIZ QUESTIONS & ANSWERS ARRAY
-
-        const quiz10 = [
-
-            { q: "Q1. Humari pehli मुलाकात ya pehla chat moment kahan/kaisa hua tha?", ans: "Sabse special pehla kadam! Dil se dil ka connection ❤️" },
-
-            { q: "Q2. Mera sabse favourite nickname kya hai jo main tumhare liye use karta hoon?", ans: "Meri Moto / Kuchu Puchu / My Universe! 😜💖" },
-
-            { q: "Q3. Tumhari kaunsi pyaari habit mujhe sabse zyada pasand hai?", ans: "Tumhara bina wajah muskurana aur har baat par mera khayal rakhna 🌸" },
-
-            { q: "Q4. Jab Meri Moto gusse me hoti hai, toh use manane ka sabse best tarika kya hai?", ans: "Pyaare se hug karna aur favourite chocolate dena 🤗🍫" },
-
-            { q: "Q5. Meri sabse favourite dish jo Kuchu Puchu apne haath se banati hai?", ans: "Tumhare haath ka bana har khana mere liye world's best hai! 🍲" },
-
-            { q: "Q6. Humari 11 saalo ki sabse memorable trip ya ghoomne ki jagah konsi rahi hai?", ans: "Jahan tum mere sath ho, wo har ek jagah sabse khoobsurat hai ✨" },
-
-            { q: "Q7. Hum दोनों me se sabse zyada cute nadaniyan kaun karta hai?", ans: "Zaahir si baat hai... Meri Kuchu Puchu hi sabse cute nadaniyan karti hai! 🥰" },
-
-            { q: "Q8. Humare 11 saal ke safar ka sabse emotional aur special moment konsa tha?", ans: "Jab humne hamesha ek doosre ka sath dene ka wada kiya 💍" },
-
-            { q: "Q9. Humari future dream destination konsi hai jahan hume sath jaana hai?", ans: "Poori duniya ghoomna Meri Moto ke sath 🌌" },
-
-            { q: "Q10. 11 saal baad bhi, main apni Kuchu Puchu se kitna pyaar karta hoon?", ans: "Infinite & Beyond My Universe ❤️ infinity tak!" }
-
-        ];
-
-
-        // Dynamic Balloons & Interactive Tap Effect
-
-        const colors = ['#ff4d4d', '#ff758c', '#fffa65', '#4cd137', '#00a8ff', '#9c88ff'];
-
-        function createBalloon() {
-
-            const container = document.getElementById('balloon-container');
-
-            if(!container) return;
-
-            const balloon = document.createElement('div');
-
-            balloon.classList.add('balloon');
-
-            balloon.style.left = Math.random() * 90 + 'vw';
-
-            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-            balloon.style.animationDuration = Math.random() * 3 + 5 + 's';
-
-            
-
-            balloon.onclick = function(e) {
-
-                e.stopPropagation();
-
-                if(typeof confetti === 'function') confetti({ particleCount: 30, spread: 50, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight } });
-
-                balloon.remove();
-
-            };
-
-
-            container.appendChild(balloon);
-
-            setTimeout(() => { balloon.remove(); }, 7000);
-
-        }
-
-
-        function triggerHeartRain() {
-
-            for(let i = 0; i < 35; i++) {
-
-                setTimeout(() => {
-
-                    const heart = document.createElement('div');
-
-                    heart.classList.add('heart-particle');
-
-                    heart.innerText = ['❤️', '💖', '💕', '✨', '🌸'][Math.floor(Math.random() * 5)];
-
-                    heart.style.left = Math.random() * 95 + 'vw';
-
-                    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-
-                    heart.style.fontSize = Math.random() * 15 + 18 + 'px';
-
-                    document.body.appendChild(heart);
-
-
-                    setTimeout(() => { heart.remove(); }, 4000);
-
-                }, i * 150);
-
-            }
-
-        }
-
-
-        function toggleMusic() {
-
-            const song = document.getElementById('bdaySong');
-
-            if(song.paused) song.play();
-
-            else song.pause();
-
-        }
-
-
-        function updateTimer() {
-
-            const now = new Date();
-
-            let bday = new Date(now.getFullYear(), 7, 17);
-
-            if (now > bday) bday = new Date(now.getFullYear() + 1, 7, 17);
-
-            const diff = bday - now;
-
-
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
-
-            document.getElementById('minutes').innerText = Math.floor((diff / 1000 / 60) % 60);
-
-            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
-
-        }
-
-        setInterval(updateTimer, 1000);
-
-        updateTimer();
-
-
-        function nextStep(stepNum) {
-
-            document.querySelectorAll('.step-section').forEach(sec => sec.classList.remove('active'));
-
-            document.getElementById('step' + stepNum).classList.add('active');
-
-
-            if(stepNum === 3) loadNote1();
-
-            if(stepNum === 4) showSlide(0);
-
-            if(stepNum === 5) { renderPromises(); initScratchCard(); }
-
-            if(stepNum === 6) renderYesNoQuestion(0);
-
-            if(stepNum === 7) filterFamilyVideos('brothers_sisters');
-
-            if(stepNum === 8) renderQuizQuestion(0);
-
-        }
-
-
-        function startSurprise() {
-
-            document.getElementById('bdaySong').play().catch(e => console.log(e));
-
-            if(typeof confetti === 'function') confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-
-            triggerHeartRain();
-
-            setInterval(createBalloon, 450);
-
-
-            nextStep(2);
-
-            const vid = document.getElementById('myVideo');
-
-            vid.play().catch(e => console.log(e));
-
-        }
-
-
-        function openEnvelope() {
-
-            document.getElementById('envelopeBox').style.display = 'none';
-
-            document.getElementById('letterContentBox').style.display = 'block';
-
-            if(typeof confetti === 'function') confetti({ particleCount: 80, spread: 60 });
-
-        }
-
-
-        function loadNote1() {
-
-            fetch('note1.txt')
-
-                .then(res => res.text())
-
-                .then(text => document.getElementById('note1Content').innerText = text)
-
-                .catch(err => document.getElementById('note1Content').innerText = "Meri Kuchu Puchu, folder me 'note1.txt' file add karein! ❤️");
-
-        }
-
-
-        const qualitiesData = [
-
-            { img: "photo1.jpg", quote: "💖 Quality 1: Meri Moto ki pyari muskaan jo mera har din roshan kar deti hai." },
-
-            { img: "photo2.jpg", quote: "🌸 Quality 2: Kuchu Puchu ka masoom dil aur sabka dil se khayal rakhne waali aadat." },
-
-            { img: "photo3.jpg", quote: "🤝 Quality 3: Meri Jaan ka har haal me mera sath dena aur meri sabse badi strength banna." },
-
-            { img: "photo4.jpg", quote: "🥰 Quality 4: Meri Moto ki nadaniyaan aur bachpana jo mujhe sabse zyada cute lagta hai." },
-
-            { img: "photo5.jpg", quote: "❤️ Quality 5: Kuchu Puchu ka gussa... jo thodi der me hi pyare se pyaar me badal jata hai." },
-
-            { img: "photo6.jpg", quote: "💡 Quality 6: Meri Life ki samajhdaari aur har mushkil situation ko aasan bana dena." },
-
-            { img: "photo7.jpg", quote: "✨ Quality 7: Meri Moto ka har choti baat par bina wajah khush hona." },
-
-            { img: "photo8.jpg", quote: "👀 Quality 8: Kuchu Puchu ki aankhein, jo bina bole hi dil ki saari baat keh deti hain." },
-
-            { img: "photo9.jpg", quote: "🤗 Quality 9: Meri Jaan ka mere liye itna care aur beinteha pyaar jatana." },
-
-            { img: "photo10.jpg", quote: "🌺 Quality 10: Meri Moto ki positive energy jo mere poore sansar ko mehka deti hai." },
-
-            { img: "photo11.jpg", quote: "💍 Quality 11: Kuchu Puchu ka meri life me hona... meri zindagi ka sabse bada gift hai." }
-
-        ];
-
-
-        let currentSlide = 0;
-
-        function showSlide(idx) {
-
-            currentSlide = idx;
-
-            document.getElementById('slideImg').src = qualitiesData[currentSlide].img;
-
-            document.getElementById('slideQuote').innerText = qualitiesData[currentSlide].quote;
-
-            document.getElementById('slideCounter').innerText = `${currentSlide + 1} / 11`;
-
-        }
-
-
-        function changeSlide(dir) {
-
-            let nextIdx = currentSlide + dir;
-
-            if(nextIdx >= 0 && nextIdx < qualitiesData.length) showSlide(nextIdx);
-
-        }
-
-
-        function zoomPhoto() {
-
-            const imgSrc = document.getElementById('slideImg').src;
-
-            showModal("Photo Zoom View 🔍", `<img src="${imgSrc}" style="width:100%; border-radius:15px; border:2px solid #ff758c;">`);
-
-        }
-
-
-        const promisesArr = [
-
-            "Promise 1: Hamesha Meri Moto ke gusse ko pyaar se manaunga ❤️",
-
-            "Promise 2: Har birthday par Kuchu Puchu ke liye aisi hi khoobsurat yaadein banaunga 🎂",
-
-            "Promise 3: Tumhari har khushi aur gham me sabse pehle tumhare sath khada rahunga 🤝",
-
-            "Promise 4: Meri Jaan ko kabhi akela ya udas nahi hone dunga 🌸",
-
-            "Promise 5: Meri Moto ki har choti nadani ko pyaar se muskura kar sehta rahunga 😜",
-
-            "Promise 6: Humare safar me hamesha Kuchu Puchu ka sabse achha dost ban kar rahunga ✨",
-
-            "Promise 7: Tumhare har dream ko poora karne me tumhara support karunga 🌌",
-
-            "Promise 8: Har mushkil me Meri Life ki dhaal ban kar rahunga 🛡️",
-
-            "Promise 9: Kuchu Puchu ko roz pehle se zyada pyaar karunga 💞",
-
-            "Promise 10: Meri Moto ke chehre ki yeh pyari smile kabhi phike nahi padne dunga 😊",
-
-            "Promise 11: Janam-janam tak sirf Meri Kuchu Puchu ka hi rahunga 💍"
-
-        ];
-
-
-        function renderPromises() {
-
-            const grid = document.getElementById('promisesGrid');
-
-            let html = "";
-
-            promisesArr.forEach((p, idx) => {
-
-                html += `<div class="promise-card" onclick="showModal('Promise #${idx+1} 💖', '${p}')"><span style="font-size:1.5rem;">💌</span><br>Promise ${idx+1}</div>`;
-
-            });
-
-            grid.innerHTML = html;
-
-        }
-
-
-        // Digital Scratch Card Logic
-
-        function initScratchCard() {
-
-            const canvas = document.getElementById('scratchCanvas');
-
-            if(!canvas) return;
-
-            const ctx = canvas.getContext('2d');
-
-            ctx.fillStyle = '#ff758c';
-
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#ffffff';
-
-            ctx.font = 'bold 16px Poppins';
-
-            ctx.textAlign = 'center';
-
-            ctx.fillText('✨ Scratch Here ✨', 140, 75);
-
-
-            let isDrawing = false;
-
-            function scratch(e) {
-
-                if(!isDrawing) return;
-
-                const rect = canvas.getBoundingClientRect();
-
-                const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-
-                const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
-
-                
-
-                ctx.globalCompositeOperation = 'destination-out';
-
-                ctx.beginPath();
-
-                ctx.arc(x, y, 20, 0, Math.PI * 2);
-
-                ctx.fill();
-
-            }
-
-
-            canvas.onmousedown = canvas.ontouchstart = () => isDrawing = true;
-
-            canvas.onmouseup = canvas.ontouchend = () => isDrawing = false;
-
-            canvas.onmousemove = canvas.ontouchmove = scratch;
-
-        }
-
-
-        // Quiz State Logic
-
-        let currentQ = 0;
-
-        let isCurrentQAnswered = false;
-
-
-        function renderQuizQuestion(idx) {
-
-            currentQ = idx;
-
-            isCurrentQAnswered = false;
-
-            const qObj = quiz10[currentQ];
-
-            document.getElementById('quizBox').innerHTML = `
-
-                <div style="font-weight:bold; color:#ff758c; font-size:1.2rem;">${qObj.q}</div>
-
-                <input type="text" id="quizInput" placeholder="Meri Moto, apna answer yahan type karo...">
-
-                <button class="action-btn" onclick="submitQuizAns()">Submit Answer 💌</button>
-
-            `;
-
-        }
-
-
-        function submitQuizAns() {
-
-            const val = document.getElementById('quizInput').value.trim();
-
-            if(!val) {
-
-                isCurrentQAnswered = false;
-
-                showModal("Arey Meri Kuchu Puchu! 😜", "Pehle jawab toh likho! Box ko khali chhod kar submit mat karo!");
-
-                return;
-
-            }
-
-
-            isCurrentQAnswered = true;
-
-            const qObj = quiz10[currentQ];
-
-            showModal(`Question #${currentQ + 1} Answer Recorded! 🎉`, `Aapne likha: "${val}"\n\n💡 Correct Answer / Note: ${qObj.ans}`);
-
-        }
-
-
-        function closeModal() {
-
-            document.getElementById('customModal').style.display = 'none';
-
-            if (isCurrentQAnswered) {
-
-                if(currentQ < quiz10.length - 1) renderQuizQuestion(currentQ + 1);
-
-                else nextStep(9);
-
-            }
-
-        }
-
-
-        function submitFeedback() {
-
-            const msg = document.getElementById('userFeedback').value.trim();
-
-            if(!msg) {
-
-                showModal("Wait! 😜", "Pehle kuch pyara sa likho toh!");
-
-                return;
-
-            }
-
-            localStorage.setItem('muskan_bday_response', msg);
-
-            showModal("Message Saved ❤️", "Aapka ye message mere dil ke paas hamesha save rahega! Happy Birthday Meri Jaan 🎉");
-
-        }
-
-
-        function showModal(title, msgHtml) {
-
-            document.getElementById('modalTitle').innerText = title;
-
-            document.getElementById('modalMsgContainer').innerHTML = typeof msgHtml === 'string' && msgHtml.startsWith('<') ? msgHtml : `<p style="line-height:1.6; margin-bottom:20px;">${msgHtml}</p>`;
-
-            document.getElementById('customModal').style.display = 'flex';
-
-        }
-
-    </script>
-
+    <!-- Floating Balloons Container -->
+    <div id="balloon-container"></div>
+
+    <!-- Floating Music Toggle -->
+    <div class="music-control" onclick="toggleMusic()" title="Play/Pause Song">🎵</div>
+
+    <audio id="bdaySong" loop><source src="song.mp3" type="audio/mpeg"></audio>
+
+    <div class="webbook-container">
+
+        <!-- STEP 1: Front Page (Sirf Yahan Muskan Naam Rahega) -->
+        <div class="step-section active" id="step1">
+            <h1 style="color: #ffd1dc; font-size: 2.2rem; text-shadow: 0 0 10px #ff416c;">Happy Birthday Muskan Singh! ✨</h1>
+            <p style="margin-top: 5px; font-style: italic; opacity: 0.9;">17 August Birthday Countdown</p>
+
+            <div id="timer">
+                <div class="time-box"><span id="days">00</span>Days</div>
+                <div class="time-box"><span id="hours">00</span>Hours</div>
+                <div class="time-box"><span id="minutes">00</span>Min</div>
+                <div class="time-box"><span id="seconds">00</span>Sec</div>
+            </div>
+
+            <div class="cake-img-box">
+                <img src="cake.gif" alt="Cake GIF" onerror="this.src='https://media.giphy.com/media/l1BgS99y8L2ybg6sM/giphy.gif'">
+            </div>
+
+            <button class="action-btn" onclick="startSurprise()">🎂 Blow Candle & Start Surprise ✨</button>
+        </div>
+
+        <!-- STEP 2: Edited Video Player -->
+        <div class="step-section" id="step2">
+            <div class="header-badge">✨ Chapter 1: Our Special Video & Precious Moments ✨</div>
+            <h2 style="color: #ffd1dc; margin-bottom: 15px;">🎥 Our Special Moments</h2>
+            <div class="video-box">
+                <video id="myVideo" controls onended="nextStep(3)">
+                    <source src="video.mp4" type="video/mp4">
+                </video>
+            </div>
+            <button class="action-btn" onclick="nextStep(3)">Next: Unseal Letter 💌</button>
+        </div>
+
+        <!-- STEP 3: Envelope, Voice Note & Letter (note1.txt) -->
+        <div class="step-section" id="step3">
+            <div class="header-badge">💌 Chapter 2: A Special Message From My Heart 💌</div>
+            <h2 style="color: #ff758c; margin-bottom: 15px;">Special Letter For You</h2>
+            
+            <div id="envelopeBox" class="envelope-wrapper" onclick="openEnvelope()">
+                <div class="envelope">
+                    <span style="font-size: 3rem;">✉️</span>
+                    <h3 style="margin-top:10px;">Tap To Unseal Letter</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.9;">For Meri Moto / Kuchu Puchu ❤️</p>
+                </div>
+            </div>
+
+            <div id="letterContentBox" style="display:none;">
+                <div style="background: rgba(0,0,0,0.3); padding: 12px; border-radius: 15px; margin-bottom: 15px; border: 1px dashed #ff758c;">
+                    <p style="font-size:0.9rem; margin-bottom:8px; color:#ffd1dc;">🎙️ Play My Audio Message:</p>
+                    <audio controls style="width:100%; max-width:300px;"><source src="voice.mp3" type="audio/mpeg"></audio>
+                </div>
+
+                <div class="display-card" id="note1Content">Loading letter from note1.txt...</div>
+                <button class="action-btn" onclick="nextStep(4)">Next: 11 Special Qualities 🌸</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: 11 Photos & Qualities Slideshow -->
+        <div class="step-section" id="step4">
+            <div class="header-badge">🌸 Chapter 3: 11 Things That Make You So Special 🌸</div>
+            <h2 style="color: #ff758c; margin-bottom: 15px;">11 Things I Love About My Kuchu Puchu</h2>
+            
+            <div class="slide-card" onclick="zoomPhoto()">
+                <img id="slideImg" src="photo1.jpg" onerror="this.src='https://via.placeholder.com/600x380/ff758c/ffffff?text=Photo+1'">
+                <p class="quality-quote" id="slideQuote">Quality loading...</p>
+                <p style="font-size:0.75rem; opacity:0.7; margin-top:5px;">(Tap photo for Zoom View 🔍)</p>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <button class="action-btn" style="padding: 10px 20px;" onclick="changeSlide(-1)">❮ Prev</button>
+                <span id="slideCounter" style="font-weight: bold; margin: 0 15px;">1 / 11</span>
+                <button class="action-btn" style="padding: 10px 20px;" onclick="changeSlide(1)">Next ❯</button>
+            </div>
+            <br>
+            <button class="action-btn" onclick="nextStep(5)">Next: Secret Scratch Card 🎁</button>
+        </div>
+
+        <!-- STEP 5: Digital Scratch Card & 11 Promises Jar -->
+        <div class="step-section" id="step5">
+            <div class="header-badge">🎁 Secret Love Coupon Scratch Card 🎁</div>
+            <p style="margin-bottom: 10px;">Apni finger se neeche card ko ghis kar secret gift dekho Meri Moto!</p>
+
+            <div class="scratch-container">
+                <div class="scratch-content">
+                    <span>🎟️ SECRET COUPON 🎟️</span>
+                    <span style="font-size:0.85rem; color:#333; margin-top:5px;">"Unlimited Hugs & Late Night Coffee Dates Coupon Forever!" ❤️</span>
+                </div>
+                <canvas id="scratchCanvas" width="280" height="140"></canvas>
+            </div>
+
+            <hr style="border: 0.5px dashed rgba(255,255,255,0.3); margin: 25px 0;">
+
+            <div class="header-badge">💖 Forever Promises From Me To You 💖</div>
+            <h2 style="color: #ff758c; margin-bottom: 10px;">Our 11 Promises Jar</h2>
+            
+            <div class="promises-grid" id="promisesGrid">
+                <!-- 11 Promise Jars rendered via JS -->
+            </div>
+            <br>
+            <button class="action-btn" onclick="nextStep(6)">Next: 11 Cute Yes/No Questions 😜</button>
+        </div>
+
+        <!-- STEP 6: 11 CUTE YES/NO QUESTIONS (ONE-BY-ONE) -->
+        <div class="step-section" id="step6">
+            <div class="header-badge">😜 Chapter 5: 11 Cute Yes/No Questions 😜</div>
+            <h2 style="color: #ff758c; margin-bottom: 10px;" id="yesNoHeaderTitle">Questions 1/11</h2>
+            
+            <div class="quiz-card" style="text-align: center;">
+                <div id="yesNoQuestionText" style="font-weight: bold; font-size: 1.25rem; color: #ffd1dc; margin-bottom: 20px;">
+                    Question loading...
+                </div>
+
+                <div class="run-container">
+                    <button class="action-btn" style="background: linear-gradient(45deg, #11998e, #38ef7d);" onclick="handleYesClick()">YES, Humesha! ❤️</button>
+                    <button class="action-btn" id="noBtn" style="background: linear-gradient(45deg, #eb3349, #f45c43);" onmouseover="moveNoBtn()" onclick="moveNoBtn()">NO 😜</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 7: 11 FAMILY WISHES VIDEO GALLERY -->
+        <div class="step-section" id="step7">
+            <div class="header-badge">👨‍👩‍👧‍👦 Chapter 6: Special Wishes From Family 👨‍👩‍👧‍👦</div>
+            <h2 style="color: #ff758c; margin-bottom: 15px;">11 Special Video Wishes For You</h2>
+
+            <div class="category-tabs">
+                <button class="tab-btn active" onclick="filterFamilyVideos('brothers_sisters', this)">👫 Brothers & Sisters</button>
+                <button class="tab-btn" onclick="filterFamilyVideos('elders', this)">🙏 Elders & Blessings</button>
+                <button class="tab-btn" onclick="filterFamilyVideos('family_members', this)">❤️ Family & Relatives</button>
+            </div>
+
+            <div class="family-video-grid" id="familyVideoGrid">
+                <!-- Videos rendered dynamically -->
+            </div>
+            <br>
+            <button class="action-btn" onclick="nextStep(8)">Next: Special Quiz Challenge 🎮</button>
+        </div>
+
+        <!-- STEP 8: Special 10 Quiz Questions (One-By-One) -->
+        <div class="step-section" id="step8">
+            <div class="header-badge">🎮 Chapter 7: Interactive Birthday Game Time 🎮</div>
+            <h2 style="color: #ff758c; margin-bottom: 15px;">Special Quiz Challenge</h2>
+            <div id="quizBox" class="quiz-card">
+                <!-- Question will render dynamically -->
+            </div>
+        </div>
+
+        <!-- STEP 9: Treasure Hunt & Rating Collector -->
+        <div class="step-section" id="step9">
+            <div class="header-badge">🎁 Chapter 8: Final Grand Finale & Real Gift Clue 🎁</div>
+            <h2 style="color: #ff758c; margin-bottom: 15px;">Final Birthday Treasure Hunt!</h2>
+            
+            <div class="display-card" style="text-align: center;">
+                <span style="font-size: 3rem;">🕵️‍♂️</span>
+                <h3 style="color:#ff007f; margin:10px 0;">Your Real Gift Search Clue:</h3>
+                <p style="font-size:1.1rem; font-weight:bold; color:#333;">"Meri Kuchu Puchu, ab apna asli birthday gift dhoondhne ke liye apne bed pillow ke niche ya wardrobe me dekho!" 🎉🎁</p>
+            </div>
+
+            <div class="quiz-card" style="margin-top: 25px;">
+                <h3 style="color:#ff758c; margin-bottom:10px;">💌 Leave A Birthday Message For Me:</h3>
+                <textarea id="userFeedback" rows="3" placeholder="Meri Moto, aapko ye surprise kaisa laga? Yahan likho..."></textarea>
+                <button class="action-btn" onclick="submitFeedback()">Send Love Note ❤️</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom Modal -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-content">
+            <h3 id="modalTitle" style="color: #ff007f; margin-bottom: 10px;">Surprise!</h3>
+            <div id="modalMsgContainer">
+                <p id="modalMsg" style="line-height: 1.6; margin-bottom: 20px;"></p>
+            </div>
+            <button class="action-btn" style="padding: 8px 25px;" onclick="closeModal()">Continue ✨</button>
+        </div>
+    </div>
+
+    <script>
+        // 11 CUTE YES/NO QUESTIONS ARRAY
+        const yesNoQuestions = [
+            "1. Kya tum agle 100 saal tak sirf meri Moto aur Kuchu Puchu bane rehne ke liye ready ho? ❤️",
+            "2. Kya tumhe mera har saal is tarah surprise dena pasand aaya? 🥰",
+            "3. Kya tum mere gusse ko hamesha ki tarah bina gussa huye pyaar se manaogi? 🌸",
+            "4. Kya tum mere sath duniya ki har jagah ghoomne chalogi? 🌌",
+            "5. Kya tum maanti ho ki tum duniya ki sabse cute aur pyaari fiance ho? 💖",
+            "6. Kya tum mere sath late night maggi aur coffee dates ke liye hamesha ready rahogi? ☕",
+            "7. Kya tum apni pyari waali smile hamesha aise hi banaye rakhogi? 😊",
+            "8. Kya tum promise karti ho ki jab bhi pareshan hogi sabse pehle mujhe bataogi? 🤝",
+            "9. Kya tum mere har ek chote-bade dream me mera sath dogi? ✨",
+            "10. Kya tum maanti ho ki 11 saal ka ye safar hamari life ka sabse khoobsurat hissa tha? 💍",
+            "11. Kya tum mujhse infinite & beyond universe jitna pyaar karti ho? ❤️"
+        ];
+
+        let currentYesNoIdx = 0;
+        function renderYesNoQuestion(idx) {
+            currentYesNoIdx = idx;
+            document.getElementById('yesNoHeaderTitle').innerText = `Question ${currentYesNoIdx + 1} / 11`;
+            document.getElementById('yesNoQuestionText').innerText = yesNoQuestions[currentYesNoIdx];
+            const noBtn = document.getElementById('noBtn');
+            if(noBtn) noBtn.style.transform = "translate(0px, 0px)";
+        }
+
+        function handleYesClick() {
+            if(typeof confetti === 'function') confetti({ particleCount: 50, spread: 60 });
+            if(currentYesNoIdx < yesNoQuestions.length - 1) {
+                renderYesNoQuestion(currentYesNoIdx + 1);
+            } else {
+                showModal("Awww Meri Moto! ❤️", "Aapne sabhi 11 Yes/No questions ka answer YES diya! Ab family ke pyaare video messages dekho... ✨");
+                nextStep(7); // Move to Family Videos
+            }
+        }
+
+        function moveNoBtn() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth < 400 ? 120 : 250) - 100;
+            const y = Math.random() * 100 - 50;
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+            showModal("Arey Arey! 😜", "NO button toh bhaag gaya! Kuchu Puchu ko sirf YES dabana allowed hai! ❤️");
+        }
+
+        // FAMILY WISHES VIDEOS DATA
+        const familyVideos = {
+            brothers_sisters: [
+                { title: "Brother / Sister Wish #1", src: "brothers_sisters/wish1.mp4" },
+                { title: "Brother / Sister Wish #2", src: "brothers_sisters/wish2.mp4" },
+                { title: "Brother / Sister Wish #3", src: "brothers_sisters/wish3.mp4" }
+            ],
+            elders: [
+                { title: "Elders Blessing #1", src: "elders/wish1.mp4" },
+                { title: "Elders Blessing #2", src: "elders/wish2.mp4" },
+                { title: "Elders Blessing #3", src: "elders/wish3.mp4" }
+            ],
+            family_members: [
+                { title: "Family Wish #1", src: "family_members/wish1.mp4" },
+                { title: "Family Wish #2", src: "family_members/wish2.mp4" },
+                { title: "Family Wish #3", src: "family_members/wish3.mp4" },
+                { title: "Family Wish #4", src: "family_members/wish4.mp4" },
+                { title: "Family Wish #5", src: "family_members/wish5.mp4" }
+            ]
+        };
+
+        function filterFamilyVideos(category, btnElem) {
+            if(btnElem) {
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                btnElem.classList.add('active');
+            }
+
+            const grid = document.getElementById('familyVideoGrid');
+            const videos = familyVideos[category] || [];
+            let html = "";
+
+            videos.forEach(v => {
+                html += `
+                    <div class="family-card">
+                        <video controls poster="https://via.placeholder.com/300x180/3a0050/ffffff?text=Play+Wish+Video">
+                            <source src="${v.src}" type="video/mp4">
+                            Your browser does not support video.
+                        </video>
+                        <div class="family-card-title">${v.title}</div>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // QUIZ QUESTIONS & ANSWERS ARRAY
+        const quiz10 = [
+            { q: "Q1. Humari pehli मुलाकात ya pehla chat moment kahan/kaisa hua tha?", ans: "Sabse special pehla kadam! Dil se dil ka connection ❤️" },
+            { q: "Q2. Mera sabse favourite nickname kya hai jo main tumhare liye use karta hoon?", ans: "Meri Moto / Kuchu Puchu / My Universe! 😜💖" },
+            { q: "Q3. Tumhari kaunsi pyaari habit mujhe sabse zyada pasand hai?", ans: "Tumhara bina wajah muskurana aur har baat par mera khayal rakhna 🌸" },
+            { q: "Q4. Jab Meri Moto gusse me hoti hai, toh use manane ka sabse best tarika kya hai?", ans: "Pyaare se hug karna aur favourite chocolate dena 🤗🍫" },
+            { q: "Q5. Meri sabse favourite dish jo Kuchu Puchu apne haath se banati hai?", ans: "Tumhare haath ka bana har khana mere liye world's best hai! 🍲" },
+            { q: "Q6. Humari 11 saalo ki sabse memorable trip ya ghoomne ki jagah konsi rahi hai?", ans: "Jahan tum mere sath ho, wo har ek jagah sabse khoobsurat hai ✨" },
+            { q: "Q7. Hum दोनों me se sabse zyada cute nadaniyan kaun karta hai?", ans: "Zaahir si baat hai... Meri Kuchu Puchu hi sabse cute nadaniyan karti hai! 🥰" },
+            { q: "Q8. Humare 11 saal ke safar ka sabse emotional aur special moment konsa tha?", ans: "Jab humne hamesha ek doosre ka sath dene ka wada kiya 💍" },
+            { q: "Q9. Humari future dream destination konsi hai jahan hume sath jaana hai?", ans: "Poori duniya ghoomna Meri Moto ke sath 🌌" },
+            { q: "Q10. 11 saal baad bhi, main apni Kuchu Puchu se kitna pyaar karta hoon?", ans: "Infinite & Beyond My Universe ❤️ infinity tak!" }
+        ];
+
+        // Dynamic Balloons & Interactive Tap Effect
+        const colors = ['#ff4d4d', '#ff758c', '#fffa65', '#4cd137', '#00a8ff', '#9c88ff'];
+        function createBalloon() {
+            const container = document.getElementById('balloon-container');
+            if(!container) return;
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.left = Math.random() * 90 + 'vw';
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.animationDuration = Math.random() * 3 + 5 + 's';
+            
+            balloon.onclick = function(e) {
+                e.stopPropagation();
+                if(typeof confetti === 'function') confetti({ particleCount: 30, spread: 50, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight } });
+                balloon.remove();
+            };
+
+            container.appendChild(balloon);
+            setTimeout(() => { balloon.remove(); }, 7000);
+        }
+
+        function triggerHeartRain() {
+            for(let i = 0; i < 35; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart-particle');
+                    heart.innerText = ['❤️', '💖', '💕', '✨', '🌸'][Math.floor(Math.random() * 5)];
+                    heart.style.left = Math.random() * 95 + 'vw';
+                    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                    heart.style.fontSize = Math.random() * 15 + 18 + 'px';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => { heart.remove(); }, 4000);
+                }, i * 150);
+            }
+        }
+
+        function toggleMusic() {
+            const song = document.getElementById('bdaySong');
+            if(song.paused) song.play();
+            else song.pause();
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            let bday = new Date(now.getFullYear(), 7, 17);
+            if (now > bday) bday = new Date(now.getFullYear() + 1, 7, 17);
+            const diff = bday - now;
+
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            document.getElementById('minutes').innerText = Math.floor((diff / 1000 / 60) % 60);
+            document.getElementById('seconds').innerText = Math.floor((diff / 1000) % 60);
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function nextStep(stepNum) {
+            document.querySelectorAll('.step-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
+
+            if(stepNum === 3) loadNote1();
+            if(stepNum === 4) showSlide(0);
+            if(stepNum === 5) { renderPromises(); initScratchCard(); }
+            if(stepNum === 6) renderYesNoQuestion(0);
+            if(stepNum === 7) filterFamilyVideos('brothers_sisters');
+            if(stepNum === 8) renderQuizQuestion(0);
+        }
+
+        function startSurprise() {
+            document.getElementById('bdaySong').play().catch(e => console.log(e));
+            if(typeof confetti === 'function') confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+            triggerHeartRain();
+            setInterval(createBalloon, 450);
+
+            nextStep(2);
+            const vid = document.getElementById('myVideo');
+            vid.play().catch(e => console.log(e));
+        }
+
+        function openEnvelope() {
+            document.getElementById('envelopeBox').style.display = 'none';
+            document.getElementById('letterContentBox').style.display = 'block';
+            if(typeof confetti === 'function') confetti({ particleCount: 80, spread: 60 });
+        }
+
+        function loadNote1() {
+            fetch('note1.txt')
+                .then(res => res.text())
+                .then(text => document.getElementById('note1Content').innerText = text)
+                .catch(err => document.getElementById('note1Content').innerText = "Meri Kuchu Puchu, folder me 'note1.txt' file add karein! ❤️");
+        }
+
+        const qualitiesData = [
+            { img: "photo1.jpg", quote: "💖 Quality 1: Meri Moto ki pyari muskaan jo mera har din roshan kar deti hai." },
+            { img: "photo2.jpg", quote: "🌸 Quality 2: Kuchu Puchu ka masoom dil aur sabka dil se khayal rakhne waali aadat." },
+            { img: "photo3.jpg", quote: "🤝 Quality 3: Meri Jaan ka har haal me mera sath dena aur meri sabse badi strength banna." },
+            { img: "photo4.jpg", quote: "🥰 Quality 4: Meri Moto ki nadaniyaan aur bachpana jo mujhe sabse zyada cute lagta hai." },
+            { img: "photo5.jpg", quote: "❤️ Quality 5: Kuchu Puchu ka gussa... jo thodi der me hi pyare se pyaar me badal jata hai." },
+            { img: "photo6.jpg", quote: "💡 Quality 6: Meri Life ki samajhdaari aur har mushkil situation ko aasan bana dena." },
+            { img: "photo7.jpg", quote: "✨ Quality 7: Meri Moto ka har choti baat par bina wajah khush hona." },
+            { img: "photo8.jpg", quote: "👀 Quality 8: Kuchu Puchu ki aankhein, jo bina bole hi dil ki saari baat keh deti hain." },
+            { img: "photo9.jpg", quote: "🤗 Quality 9: Meri Jaan ka mere liye itna care aur beinteha pyaar jatana." },
+            { img: "photo10.jpg", quote: "🌺 Quality 10: Meri Moto ki positive energy jo mere poore sansar ko mehka deti hai." },
+            { img: "photo11.jpg", quote: "💍 Quality 11: Kuchu Puchu ka meri life me hona... meri zindagi ka sabse bada gift hai." }
+        ];
+
+        let currentSlide = 0;
+        function showSlide(idx) {
+            currentSlide = idx;
+            document.getElementById('slideImg').src = qualitiesData[currentSlide].img;
+            document.getElementById('slideQuote').innerText = qualitiesData[currentSlide].quote;
+            document.getElementById('slideCounter').innerText = `${currentSlide + 1} / 11`;
+        }
+
+        function changeSlide(dir) {
+            let nextIdx = currentSlide + dir;
+            if(nextIdx >= 0 && nextIdx < qualitiesData.length) showSlide(nextIdx);
+        }
+
+        function zoomPhoto() {
+            const imgSrc = document.getElementById('slideImg').src;
+            showModal("Photo Zoom View 🔍", `<img src="${imgSrc}" style="width:100%; border-radius:15px; border:2px solid #ff758c;">`);
+        }
+
+        const promisesArr = [
+            "Promise 1: Hamesha Meri Moto ke gusse ko pyaar se manaunga ❤️",
+            "Promise 2: Har birthday par Kuchu Puchu ke liye aisi hi khoobsurat yaadein banaunga 🎂",
+            "Promise 3: Tumhari har khushi aur gham me sabse pehle tumhare sath khada rahunga 🤝",
+            "Promise 4: Meri Jaan ko kabhi akela ya udas nahi hone dunga 🌸",
+            "Promise 5: Meri Moto ki har choti nadani ko pyaar se muskura kar sehta rahunga 😜",
+            "Promise 6: Humare safar me hamesha Kuchu Puchu ka sabse achha dost ban kar rahunga ✨",
+            "Promise 7: Tumhare har dream ko poora karne me tumhara support karunga 🌌",
+            "Promise 8: Har mushkil me Meri Life ki dhaal ban kar rahunga 🛡️",
+            "Promise 9: Kuchu Puchu ko roz pehle se zyada pyaar karunga 💞",
+            "Promise 10: Meri Moto ke chehre ki yeh pyari smile kabhi phike nahi padne dunga 😊",
+            "Promise 11: Janam-janam tak sirf Meri Kuchu Puchu ka hi rahunga 💍"
+        ];
+
+        function renderPromises() {
+            const grid = document.getElementById('promisesGrid');
+            let html = "";
+            promisesArr.forEach((p, idx) => {
+                html += `<div class="promise-card" onclick="showModal('Promise #${idx+1} 💖', '${p}')"><span style="font-size:1.5rem;">💌</span><br>Promise ${idx+1}</div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Digital Scratch Card Logic
+        function initScratchCard() {
+            const canvas = document.getElementById('scratchCanvas');
+            if(!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ff758c';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px Poppins';
+            ctx.textAlign = 'center';
+            ctx.fillText('✨ Scratch Here ✨', 140, 75);
+
+            let isDrawing = false;
+            function scratch(e) {
+                if(!isDrawing) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+                const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+                
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 20, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            canvas.onmousedown = canvas.ontouchstart = () => isDrawing = true;
+            canvas.onmouseup = canvas.ontouchend = () => isDrawing = false;
+            canvas.onmousemove = canvas.ontouchmove = scratch;
+        }
+
+        // Quiz State Logic
+        let currentQ = 0;
+        let isCurrentQAnswered = false;
+
+        function renderQuizQuestion(idx) {
+            currentQ = idx;
+            isCurrentQAnswered = false;
+            const qObj = quiz10[currentQ];
+            document.getElementById('quizBox').innerHTML = `
+                <div style="font-weight:bold; color:#ff758c; font-size:1.2rem;">${qObj.q}</div>
+                <input type="text" id="quizInput" placeholder="Meri Moto, apna answer yahan type karo...">
+                <button class="action-btn" onclick="submitQuizAns()">Submit Answer 💌</button>
+            `;
+        }
+
+        function submitQuizAns() {
+            const val = document.getElementById('quizInput').value.trim();
+            if(!val) {
+                isCurrentQAnswered = false;
+                showModal("Arey Meri Kuchu Puchu! 😜", "Pehle jawab toh likho! Box ko khali chhod kar submit mat karo!");
+                return;
+            }
+
+            isCurrentQAnswered = true;
+            const qObj = quiz10[currentQ];
+            showModal(`Question #${currentQ + 1} Answer Recorded! 🎉`, `Aapne likha: "${val}"\n\n💡 Correct Answer / Note: ${qObj.ans}`);
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').style.display = 'none';
+            if (isCurrentQAnswered) {
+                if(currentQ < quiz10.length - 1) renderQuizQuestion(currentQ + 1);
+                else nextStep(9);
+            }
+        }
+
+        function submitFeedback() {
+            const msg = document.getElementById('userFeedback').value.trim();
+            if(!msg) {
+                showModal("Wait! 😜", "Pehle kuch pyara sa likho toh!");
+                return;
+            }
+            localStorage.setItem('muskan_bday_response', msg);
+            showModal("Message Saved ❤️", "Aapka ye message mere dil ke paas hamesha save rahega! Happy Birthday Meri Jaan 🎉");
+        }
+
+        function showModal(title, msgHtml) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMsgContainer').innerHTML = typeof msgHtml === 'string' && msgHtml.startsWith('<') ? msgHtml : `<p style="line-height:1.6; margin-bottom:20px;">${msgHtml}</p>`;
+            document.getElementById('customModal').style.display = 'flex';
+        }
+    </script>
 </body>
-
 </html>
-
-
